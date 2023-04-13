@@ -1,8 +1,7 @@
 # Discord: synthetic#0679
 <div align="center">
     <img src="https://cdn.discordapp.com/attachments/1083214339638571040/1086678687476371588/IMG_6299.gif">
-<div>
-# Noded                                            
+<div>                                           
 Very good Anti Debug for node programs and soon golang and python programs                                                   
 
 Made with ❤️ By Synthetic                                              
