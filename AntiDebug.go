@@ -90,11 +90,11 @@ func download(url string) ([]string, error) {
 
 func main() {
 	urls := []string{
-		"https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/pc_name_list.txt",
-		"https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/mac_list.txt",
-		"https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/ip_list.txt",
-		"https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/hwid_list.txt",
-		"https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/gpu_list.txt",
+		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/pc_name_list.txt",
+		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/mac_list.txt",
+		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/ip_list.txt",
+		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/hwid_list.txt",
+		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/gpu_list.txt",
 	}
 
 	ip, _ := net.Interfaces()
@@ -142,4 +142,3 @@ func main() {
 		}
 	}
 }
-
