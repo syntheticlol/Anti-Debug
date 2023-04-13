@@ -1,14 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"os"
 	"strings"
 
 	"github.com/shirou/gopsutil/host"
-	"github.com/shirou/gopsutil/net"
+	"github.com/shirou/gopsutil/mem"
+	"github.com/shirou/gopsutil/gpu"
 )
 
 var processes = []string{
@@ -65,14 +66,6 @@ var processes = []string{
 	"ida.exe",
 }
 
-func Check() {
-    for _, proc := range processes {
-        if strings.Contains(strings.ToLower(os.Args[0]), proc) {
-            os.Exit(1)
-        }
-    }
-}
-
 func download(url string) ([]string, error) {
 	resp, err := http.Get(url)
 	if err != nil {
@@ -88,17 +81,26 @@ func download(url string) ([]string, error) {
 	return strings.Split(string(bytes), "\n"), nil
 }
 
+func Check() {
+	for _, proc := range processes {
+		if strings.Contains(strings.ToLower(os.Args[0]), proc) {
+			os.Exit(1)
+		}
+	}
+}
+
 func main() {
 	urls := []string{
 		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/pc_name_list.txt",
 		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/mac_list.txt",
 		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/ip_list.txt",
-		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/hwid_list.txt",
+		 "https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/serial_list.txt",
 		"https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/gpu_list.txt",
 	}
 
 	ip, _ := net.Interfaces()
 	hostInfo, _ := host.Info()
+	memInfo, _ := mem.VirtualMemory()
 
 	for _, url := range urls {
 		list, err := download(url)
@@ -116,8 +118,17 @@ func main() {
 					os.Exit(1)
 				}
 
-				for _, addr := range addr.Addrs {
-					if strings.ToLower(addr.IP.String()) == strings.ToLower(item) {
+				addrs, err := addr.Addrs()
+				if err != nil {
+					continue
+				}
+
+				for _, addr := range addrs {
+					ip, _, err := net.ParseCIDR(addr.String())
+					if err != nil {
+						continue
+					}
+					if strings.ToLower(ip.String()) == strings.ToLower(item) {
 						os.Exit(1)
 					}
 				}
@@ -127,11 +138,11 @@ func main() {
 				os.Exit(1)
 			}
 
-			if strings.ToLower(hostInfo.HWID) == strings.ToLower(item) {
+			if strings.ToLower(memInfo.SMBIOSBIOSInformation.SerialNumber) == strings.ToLower(item) {
 				os.Exit(1)
 			}
 
-			gpus, err := host.GPUs()
+			gpus, err := gpu.New()
 			if err == nil {
 				for _, gpu := range gpus {
 					if strings.ToLower(gpu.Name) == strings.ToLower(item) {
