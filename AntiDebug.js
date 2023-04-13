@@ -94,11 +94,11 @@ const antilists = {
 
 const ablists = async () => {
     const lists = [
-        { name: 'GPU', url: 'https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/gpu_list.txt' },
-        { name: 'HWID', url: 'https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/hwid_list.txt' },
-        { name: 'IP', url: 'https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/ip_list.txt' },
-        { name: 'MAC', url: 'https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/mac_list.txt' },
-        { name: 'PC Name', url: 'https://raw.githubusercontent.com/Syntheticc/EXO-Grabber/main/Utils/devutils/pc_name_list.txt' },
+        { name: 'GPU', url: 'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/gpu_list.txt' },
+        { name: 'HWID', url: 'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/hwid_list.txt' },
+        { name: 'IP', url: 'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/ip_list.txt' },
+        { name: 'MAC', url: 'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/mac_list.txt' },
+        { name: 'PC Name', url: 'https://raw.githubusercontent.com/6nz/virustotal-vm-blacklist/main/pc_name_list.txt' },
     ];
 
     for (const list of lists) {
