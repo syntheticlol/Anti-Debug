@@ -10,7 +10,7 @@ Noded Debug Features:
 
 ------------   
 # Noded Anti Debug Features
-- Blocks Over 50+ Popular Debugging Softwars 
+- Blocks Over 50+ Popular Debugging Softwares 
 - Blocks over 7 VM Softwares 
 - Checks for IP
 - Checks for HWID
